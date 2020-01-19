@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class TemperatureConversion {
 
-
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -20,6 +19,11 @@ public class TemperatureConversion {
 
     }
 
+    /**
+     * The function converts Fahrenheit to Celsius degrees
+     * @param f The read value in Fahrenheit
+     * @return The converted value from Fahrenheit to Celsius
+     */
     public static double convertFahrenheitToCelsius(double f) {
         return (f - 32) * 5 / 9;
 

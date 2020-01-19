@@ -2,6 +2,9 @@ package com.hm4ex1.main;
 
 import java.util.Scanner;
 
+/**
+ * Class used to read 3 values from the keyboard and computes the higher value from them
+ */
 public class GetMax {
 
     public static void main(String[] args) {
@@ -19,7 +22,12 @@ public class GetMax {
         System.out.println(max);
     }
 
-
+    /**
+     *
+     * @param a First value that wil be compared
+     * @param b Second value that wil be compared
+     * @return Return the highest value
+     */
     public static int getMax(int a, int b) {
 
         if (a > b) {

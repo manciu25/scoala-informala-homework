@@ -20,6 +20,12 @@ public class DataValidation {
         }
     }
 
+    /**
+     * The function validates if the input values are valid
+     * @param hour Input value for hour
+     * @param minutes Input value for minutes
+     * @return Returns false if the data is invalid and true if the data is valid
+     */
     public static boolean dataValidation(int hour, int minutes) {
         if (hour < 0 || hour > 24) {
             return false;
