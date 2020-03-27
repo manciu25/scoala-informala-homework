@@ -1,29 +1,39 @@
-package com.calculator;
+package com.ski.biathlons;
 
-import org.junit.Assert;
-import org.junit.Test;
+import java.io.*;
+import java.util.*;
+
+/**
+ * Main class, that tests the functionality of the program
+ */
 
 public class Main {
+    public static void main(String[] args) throws IOException {
 
-    /**
-     * Print the result of the folowing methods:
-     * getMax (returns max value from a, b and c)
-     * getMin  (returns max value from a, b and c)
-     * getSum  (returns sum a, b and c)
-     * getAvg (returns average of a, b and c)
-     * areAllPositive (returns true if a,b and c are all positive numbers and false otherwise)
-     * isAEven (returns true if a is even and false otherwise)
-     */
-    public static void main(String[] args) {
-        Calculator calc = new Calculator(2, -1, 5);
-        System.out.println(calc.getA());
-        System.out.println(calc.getMax());
-        System.out.println(calc.getAvg());
-        System.out.println(calc.getMin());
-        System.out.println(calc.getSum());
-        System.out.println(calc.isAEven());
-        System.out.println(calc.areAllPositive());
+        ArrayList<String> array = ReadingResults.readFromFile();
+        List<Athlete> athletes = new ArrayList<Athlete>();
+
+        for (String linie : array) {
+
+            System.out.println("array de i" + linie);
+            String[] splitArray = linie.split(",");
+            String[] array2 = splitArray[3].split(":");
+            SkiTimeResult result = new SkiTimeResult(Integer.parseInt(array2[0]), Integer.parseInt(array2[1]));
+            Athlete a = new Athlete(Integer.parseInt(splitArray[0]), splitArray[1], splitArray[2], result, splitArray[4], splitArray[5], splitArray[6]);
+            long result1 = a.getSkiTimeResult().getMinutes() * 60 + a.getSkiTimeResult().getSeconds() + (Util.shooting(a.getFirstShooting()) + Util.shooting(a.getSecondShooting()) + Util.shooting(a.getThirdShooting())) * 10;
+            int min = (int) result1 / 60;
+            int sec = (int) result1 - min * 60;
+            System.out.println(min + " " + sec);
+            SkiTimeResult q = new SkiTimeResult(min, sec);
+            a.setSkiTimeResult(q);
+
+            athletes.add(a);
+        }
+
+        Collections.sort(athletes, new Athlete.AthletesResultsComparator());
+        for (Athlete q : athletes) {
+            System.out.println(q.toString());
+        }
 
     }
-
 }
