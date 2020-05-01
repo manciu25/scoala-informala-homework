@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <div th:replace="common ::myheader"></div>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md  navbar-light" style="background-color: #35807f;">
+    <a class="navbar-brand" href="/recipe/page/1"><font color="white"><b>Home</b></font></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/recipe/soup/1"><font color="white"><b>Soup</b></font><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/recipe/main-dish/1"><font color="white"><b>Main Dish</b></font></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/recipe/salad/1"><font color="white"><b>Salad</b></font></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/recipe/dessert/1"><font color="white"><b>Dessert</b></font></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/recipe/miscellaneous/1"><font color="white"><b>Miscellaneous</b></font></a>
+            </li>
+        </ul>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav pull right" href="/recipe/about">
+            <li class="nav-item">
+                <a class="navbar-brand" href="/recipe/add"><b><font color="white">Add</font></b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/recipe/about"><font color="white">About Me</font></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="col-auto d-none d-lg-block">
+            <div align="right">
+                <div class="row">
+                    <div>
+                        <strong class="d-inline-block mb-2">
+                            <h2 class="mb-0">
+                                <font color="#35807f">
+                                    <div th:text="${obiectDeTipReteta.title}"></div>
+                                </font>
+                            </h2>
+                        </strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-1 text-muted">
+        Published date: <span th:text="${obiectDeTipReteta.created}"></span> / Last update: <span
+            th:text="${obiectDeTipReteta.lastModified}"></span>
+    </div>
+    <div class="d-flex justify-content-between">
+        <div>
+            <img width="500" height="500" th:src="@{'data:image/jpng;base64,'+${obiectDeTipReteta.image}}"/>
+        </div>
+        <div class="row">
+
+            <div>
+                <form th:action="@{/recipe/delete/{id}(id=${obiectDeTipReteta.id}}" method="POST"/>
+                <input type="hidden" name="idRecipe" th:value="${obiectDeTipReteta.id}"/>
+                <input class="btn btn-danger" type="submit" value="Sterge"></form>
+            </div>
+
+            <div>
+                <button type="button" class="btn btn-light"><a
+                        th:href="@{/recipe/edit/{id}(id=${obiectDeTipReteta.id})}">Edit</a>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col p-4 d-flex flex-column position-static">
+        <p class="mb-auto">
+            <font color="#35807f"><h5>Ingredients</h5></font>
+        <div th:text="${obiectDeTipReteta.ingredients}"></div>
+        </p>
+        <p class="mb-auto">
+            <font color="#35807f"><h5>Directions</h5></font>
+        <div th:text="${obiectDeTipReteta.directions}"></div>
+        </p>
+    </div>
+</div>
+</div>
+</div>
+
+<div th:replace="common ::script"></div>
+</body>
+</html>

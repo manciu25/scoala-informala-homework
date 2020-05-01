@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <div th:replace="common ::myheader"></div>
+</head>
+<body>
+<div th:replace="common ::navbar"></div>
+
+<div class="container">
+    <form th:action="@{/recipe/edit/{id}(id=${retetaDeEditat.id})}" th:object="${retetaDeEditat}" method="POST"
+          enctype="multipart/form-data">
+        <div class="form-group row">
+            <p class="font-weight-bold">
+            <h2><font color="#35807f">
+                Edit "<span th:text="${retetaDeEditat.title}"> Title</span>" recipe
+            </font></h2>
+            </p>
+        </div>
+        <div class="form-group row">
+            <label for="Recipe Title"><font color="#35807f">Recipe Title</font></label>
+            <textarea class="form-control" id="Recipe Title" placeholder="Recipe Title" th:field="*{title}"></textarea>
+            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger">Name Error</span>
+        </div>
+        <div class="form-group row">
+            <label for="description"><font color="#35807f">Short description</font></label>
+            <textarea class="form-control" id="description" placeholder="Short description"
+                      th:field="*{description}"></textarea>
+            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                  class="text-danger">Name Error</span>
+        </div>
+        <div class="form-group row">
+            <label for="ingredients"><font color="#35807f">Ingredients</font></label>
+            <textarea class="form-control" id="ingredients" placeholder="Ingredients"
+                      th:field="*{ingredients}"></textarea>
+            <span th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}"
+                  class="text-danger">Name Error</span>
+        </div>
+        <div class="form-group row">
+            <label for="directions"><font color="#35807f">Directions</font></label>
+            <textarea class="form-control" id="directions" placeholder="directions" th:field="*{directions}"></textarea>
+            <span th:if="${#fields.hasErrors('directions')}" th:errors="*{directions}"
+                  class="text-danger">Name Error</span>
+        </div>
+        <div class="form-group row">
+            <label for="Image"><font color="#35807f">Photo</font></label>
+            <input type="file" class="form-control" accept="image/x-png, image/gif, image/jpeg" id="Image"
+                   placeholder="Image" th:field="*{image}">
+            <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}" class="text-danger">Name Error</span>
+        </div>
+        <div class="form-group row">
+            <label for="Category"><font color="#35807f">Category</font></label>
+            <select id="category" class="form-control" th:field="*{category}">
+                <option th:each="mycategory : ${T( com.project.recipeswebapplication.model.Category).values()}"
+                        th:value="${mycategory}"
+                        th:selected="${mycategory == T(com.project.recipeswebapplication.model.Category)}"
+                        th:text="${mycategory}"></option>
+            </select>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="reset" class="btn btn-danger btn-primary"> RESET</button>
+        </div>
+    </form>
+</div>
+<div th:replace="common ::script"></div>
+</body>
+</html>

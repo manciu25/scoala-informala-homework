@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+
+<body>
+
+<div th:fragment="myheader">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Project</title>
+</div>
+
+<div th:fragment="navbar">
+
+
+    <nav class="navbar navbar-expand-md  navbar-light" style="background-color: #35807f;">
+        <a class="navbar-brand" href="/recipe/page/1"><font color="white"><b>Home</b></font></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/recipe/soup/1"><font color="white"><b>Soup</b></font><span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/recipe/main-dish/1"><font color="white"><b>Main Dish</b></font></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/recipe/salad/1"><font color="white"><b>Salad</b></font></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/recipe/dessert/1"><font color="white"><b>Dessert</b></font></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/recipe/miscellaneous/1"><font color="white"><b>Miscellaneous</b></font></a>
+                </li>
+            </ul>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul class="navbar-nav pull right" href="/recipe/about">
+                <li class="nav-item">
+                    <a class="navbar-brand" href="/recipe/add"><b><font color="white">Add</font></b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/recipe/about"><font color="white">About Me</font></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+
+
+<div th:fragment="content">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between">
+            <h2><font color="#35807f"> <span th:text="${type}"></span></font></h2>
+            <div class="row" th:fragment="pagination">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <nav aria-label="Pagination">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item" th:each="pageNumber : ${pageNumbers}">
+                                <a class="page-link" th:href="@{|/recipe/page/${pageNumber}|}"
+                                   th:text=${pageNumber}>1</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+        </div>
+        
+
+        <div class="container">
+            <div class="row ">
+                <div th:each="rand : ${lista}" class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <a  th:href="@{|/recipe/oreteta/${rand.id}|}"> <img width="250" height="250" th:src="@{'data:image/jpng;base64,'+${rand.image}}"/></a>
+                        <div class="card-body">
+                           <h5> <p class="card-text" th:text="${rand.title}"></p>
+                            <p class="card-text" th:text="${rand.description}"></p></h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div th:fragment="script">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</div>
+
+
+</body>
+</html>
